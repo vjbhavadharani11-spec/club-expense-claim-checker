@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>College Club Expense Claim Checker - Dashboard</title>
+<style>
+  :root { --bg-primary: #0f172a; --bg-card: #1e293b; --text-primary: #f8fafc; --text-muted: #94a3b8; --accent: #38bdf8; --success: #22c55e; --warning: #f59e0b; --danger: #ef4444; --border: #334155; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+  body { background-color: var(--bg-primary); color: var(--text-primary); padding: 24px; }
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px; }
+  .header h1 { font-size: 24px; color: var(--accent); }
+  .badge { background: #0369a1; color: #e0f2fe; padding: 5px 12px; border-radius: 9999px; font-size: 13px; font-weight: 600; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .tab-btn { background: none; border: none; color: var(--text-muted); font-size: 15px; font-weight: 600; padding: 10px 18px; cursor: pointer; border-bottom: 2px solid transparent; }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+  .metric-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+  .metric-val { font-size: 28px; font-weight: 700; }
+  .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; }
+  th { background: #182234; color: var(--text-muted); padding: 12px 14px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .status-tag { padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+  .tag-ok_to_pay { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+  .tag-needs_bill { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
+  .tag-needs_approval { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+  .tag-over_budget { background: rgba(217, 70, 239, 0.2); color: #e879f9; border: 1px solid #d946ef; }
+  .tag-needs_more_info { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid #94a3b8; }
+  pre { background: #182234; border: 1px solid var(--border); border-radius: 6px; padding: 16px; overflow-x: auto; color: #38bdf8; font-family: monospace; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <h1>🎓 College Club Expense Claim Checker</h1>
+    <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">CIT AI-Native Engineering Capstone · Automated Audit Triage Dashboard</p>
+  </div>
+  <span class="badge">Faculty Treasurer Checkpoint</span>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('tab-audit')">📊 Audit Run (22 Claims)</button>
+  <button class="tab-btn" onclick="switchTab('tab-payable')">🟢 Payable Claims (14)</button>
+  <button class="tab-btn" onclick="switchTab('tab-review')">🔴 Flagged For Review (8)</button>
+  <button class="tab-btn" onclick="switchTab('tab-summary')">📑 Official Summary Report</button>
+</div>
+
+<div id="tab-audit" class="tab-content active">
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-label">Total Claims</div><div class="metric-val">22</div><div style="color:var(--accent); font-size:12px; margin-top:6px;">Audited</div></div>
+    <div class="metric-card"><div class="metric-label">OK to Pay</div><div class="metric-val" style="color:var(--success);">14</div><div style="color:var(--success); font-size:12px; margin-top:6px;">Disbursement ready</div></div>
+    <div class="metric-card"><div class="metric-label">Needs Bill</div><div class="metric-val" style="color:var(--warning);">2</div><div style="color:var(--warning); font-size:12px; margin-top:6px;">Missing receipts</div></div>
+    <div class="metric-card"><div class="metric-label">Needs Approval</div><div class="metric-val" style="color:var(--danger);">2</div><div style="color:var(--danger); font-size:12px; margin-top:6px;">&gt;5k / Split claims</div></div>
+    <div class="metric-card"><div class="metric-label">Over Budget</div><div class="metric-val" style="color:#e879f9;">3</div><div style="color:#e879f9; font-size:12px; margin-top:6px;">Exceeds limit</div></div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead><tr><th>ID</th><th>Club</th><th>Date</th><th>Category</th><th>Amount</th><th>Status</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>C01</strong></td><td>Coding Club</td><td>2026-10-01</td><td>printing</td>
+          <td>Rs. 1,250</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C02</strong></td><td>Dance Club</td><td>2026-10-01</td><td>equipment</td>
+          <td>Rs. 1,800</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C03</strong></td><td>Dance Club</td><td>2026-10-02</td><td>travel</td>
+          <td>Rs. 350</td><td><span class="status-tag tag-needs_bill">needs_bill</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">No bill or receipt attached</td>
+        </tr>
+        <tr>
+          <td><strong>C04</strong></td><td>Robotics Club</td><td>2026-10-03</td><td>equipment</td>
+          <td>Rs. 6,500</td><td><span class="status-tag tag-needs_approval">needs_approval</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim amount Rs. 6,500 exceeds single-claim threshold of Rs. 5,000</td>
+        </tr>
+        <tr>
+          <td><strong>C05</strong></td><td>Music Club</td><td>2026-10-04</td><td>other</td>
+          <td>Rs. 1,200</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C06</strong></td><td>Sports Club</td><td>2026-10-05</td><td>equipment</td>
+          <td>Rs. 2,100</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C07</strong></td><td>Coding Club</td><td>2026-10-05</td><td>food</td>
+          <td>Rs. 2,500</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C08</strong></td><td>Drama Club</td><td>2026-10-06</td><td>costumes</td>
+          <td>Rs. 3,200</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C09</strong></td><td>Literary Club</td><td>2026-10-06</td><td>other</td>
+          <td>N/A</td><td><span class="status-tag tag-needs_more_info">needs_more_info</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Missing or unverified amount</td>
+        </tr>
+        <tr>
+          <td><strong>C10</strong></td><td>Coding Club</td><td>2026-10-07</td><td>printing</td>
+          <td>Rs. 900</td><td><span class="status-tag tag-over_budget">over_budget</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim Rs. 900 pushes total (2,150) over category budget of Rs. 2,000</td>
+        </tr>
+        <tr>
+          <td><strong>C11</strong></td><td>Art Club</td><td>2026-10-08</td><td>other</td>
+          <td>Rs. 1,500</td><td><span class="status-tag tag-needs_bill">needs_bill</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">No bill or receipt attached</td>
+        </tr>
+        <tr>
+          <td><strong>C12</strong></td><td>Photography Club</td><td>2026-10-09</td><td>equipment</td>
+          <td>Rs. 2,800</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C13</strong></td><td>Music Club</td><td>2026-10-10</td><td>equipment</td>
+          <td>Rs. 8,500</td><td><span class="status-tag tag-needs_approval">needs_approval</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim amount Rs. 8,500 exceeds single-claim threshold of Rs. 5,000</td>
+        </tr>
+        <tr>
+          <td><strong>C14</strong></td><td>Debate Club</td><td>2026-10-11</td><td>prizes</td>
+          <td>Rs. 3,000</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C15</strong></td><td>Robotics Club</td><td>2026-10-12</td><td>other</td>
+          <td>Rs. 4,200</td><td><span class="status-tag tag-over_budget">over_budget</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim Rs. 4,200 pushes total (4,200) over category budget of Rs. 3,000</td>
+        </tr>
+        <tr>
+          <td><strong>C16</strong></td><td>Literary Club</td><td>2026-10-12</td><td>prizes</td>
+          <td>Rs. 1,500</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C17</strong></td><td>Drama Club</td><td>2026-10-13</td><td>costumes</td>
+          <td>Rs. 2,400</td><td><span class="status-tag tag-over_budget">over_budget</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim Rs. 2,400 pushes total (5,600) over category budget of Rs. 5,000</td>
+        </tr>
+        <tr>
+          <td><strong>C18</strong></td><td>Sports Club</td><td>2026-10-14</td><td>travel</td>
+          <td>Rs. 4,500</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C19</strong></td><td>Gaming Club</td><td>2026-10-15</td><td>equipment</td>
+          <td>Rs. 3,200</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C20</strong></td><td>Coding Club</td><td>2026-10-16</td><td>printing</td>
+          <td>Rs. 600</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C21</strong></td><td>Dance Club</td><td>2026-10-17</td><td>food</td>
+          <td>Rs. 1,800</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+        <tr>
+          <td><strong>C22</strong></td><td>Debate Club</td><td>2026-10-18</td><td>food</td>
+          <td>Rs. 1,200</td><td><span class="status-tag tag-ok_to_pay">ok_to_pay</span></td>
+          <td style="color: var(--text-muted); font-size: 12px;">Claim verified and within budget</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="tab-payable" class="tab-content">
+  <div class="table-container">
+    <table>
+      <thead><tr><th>ID</th><th>Club</th><th>Date</th><th>Category</th><th>Amount</th><th>Summary</th></tr></thead>
+      <tbody>
+        <tr><td><strong>C01</strong></td><td>Coding Club</td><td>2026-10-01</td><td>printing</td><td>Rs. 1,250</td><td>Paid Rs. 1,250 for banner printing</td></tr>
+        <tr><td><strong>C02</strong></td><td>Dance Club</td><td>2026-10-01</td><td>equipment</td><td>Rs. 1,800</td><td>Stage makeup kit Rs. 1,800 bought</td></tr>
+        <tr><td><strong>C05</strong></td><td>Music Club</td><td>2026-10-04</td><td>other</td><td>Rs. 1,200</td><td>Drumsticks and guitar strings for Rs.</td></tr>
+        <tr><td><strong>C06</strong></td><td>Sports Club</td><td>2026-10-05</td><td>equipment</td><td>Rs. 2,100</td><td>Cricket balls and badminton shuttlecocks worth</td></tr>
+        <tr><td><strong>C07</strong></td><td>Coding Club</td><td>2026-10-05</td><td>food</td><td>Rs. 2,500</td><td>Refreshments and snacks for hackathon participants</td></tr>
+        <tr><td><strong>C08</strong></td><td>Drama Club</td><td>2026-10-06</td><td>costumes</td><td>Rs. 3,200</td><td>Costumes rental for annual play Rs.</td></tr>
+        <tr><td><strong>C12</strong></td><td>Photography Club</td><td>2026-10-09</td><td>equipment</td><td>Rs. 2,800</td><td>Camera tripod Rs. 2,800. Bill attached</td></tr>
+        <tr><td><strong>C14</strong></td><td>Debate Club</td><td>2026-10-11</td><td>prizes</td><td>Rs. 3,000</td><td>Trophies and certificates for debate championship</td></tr>
+        <tr><td><strong>C16</strong></td><td>Literary Club</td><td>2026-10-12</td><td>prizes</td><td>Rs. 1,500</td><td>Book prizes for poetry competition Rs.</td></tr>
+        <tr><td><strong>C18</strong></td><td>Sports Club</td><td>2026-10-14</td><td>travel</td><td>Rs. 4,500</td><td>Bus hire for tournament travel Rs.</td></tr>
+        <tr><td><strong>C19</strong></td><td>Gaming Club</td><td>2026-10-15</td><td>equipment</td><td>Rs. 3,200</td><td>Keyboard and mouse sets Rs. 3,200.</td></tr>
+        <tr><td><strong>C20</strong></td><td>Coding Club</td><td>2026-10-16</td><td>printing</td><td>Rs. 600</td><td>Stickers and badge printing Rs. 600.</td></tr>
+        <tr><td><strong>C21</strong></td><td>Dance Club</td><td>2026-10-17</td><td>food</td><td>Rs. 1,800</td><td>Refreshments for dance rehearsal Rs. 1,800.</td></tr>
+        <tr><td><strong>C22</strong></td><td>Debate Club</td><td>2026-10-18</td><td>food</td><td>Rs. 1,200</td><td>Snacks for inter-college delegates Rs. 1,200.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="tab-review" class="tab-content">
+  <div class="table-container">
+    <table>
+      <thead><tr><th>ID</th><th>Club</th><th>Date</th><th>Category</th><th>Amount</th><th>Status</th><th>Reason</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>C03</strong></td><td>Dance Club</td><td>2026-10-02</td><td>travel</td><td>Rs. 350</td>
+          <td><span class="status-tag tag-needs_bill">needs_bill</span></td>
+          <td style="color:#f87171; font-size:12px;">No bill or receipt attached</td><td style="color:var(--text-muted); font-size:12px;">Auto fare to inter-college fest 350. No bill from the auto driver</td>
+        </tr>
+        <tr>
+          <td><strong>C04</strong></td><td>Robotics Club</td><td>2026-10-03</td><td>equipment</td><td>Rs. 6,500</td>
+          <td><span class="status-tag tag-needs_approval">needs_approval</span></td>
+          <td style="color:#f87171; font-size:12px;">Claim amount Rs. 6,500 exceeds single-claim threshold of Rs. 5,000</td><td style="color:var(--text-muted); font-size:12px;">Purchased Arduino kits and sensors for Rs. 6,500. Bill attached</td>
+        </tr>
+        <tr>
+          <td><strong>C09</strong></td><td>Literary Club</td><td>2026-10-06</td><td>other</td><td>N/A</td>
+          <td><span class="status-tag tag-needs_more_info">needs_more_info</span></td>
+          <td style="color:#f87171; font-size:12px;">Missing or unverified amount</td><td style="color:var(--text-muted); font-size:12px;">Need money for our event</td>
+        </tr>
+        <tr>
+          <td><strong>C10</strong></td><td>Coding Club</td><td>2026-10-07</td><td>printing</td><td>Rs. 900</td>
+          <td><span class="status-tag tag-over_budget">over_budget</span></td>
+          <td style="color:#f87171; font-size:12px;">Claim Rs. 900 pushes total (2,150) over category budget of Rs. 2,000</td><td style="color:var(--text-muted); font-size:12px;">Event pamphlets printing Rs. 900. Bill attached</td>
+        </tr>
+        <tr>
+          <td><strong>C11</strong></td><td>Art Club</td><td>2026-10-08</td><td>other</td><td>Rs. 1,500</td>
+          <td><span class="status-tag tag-needs_bill">needs_bill</span></td>
+          <td style="color:#f87171; font-size:12px;">No bill or receipt attached</td><td style="color:var(--text-muted); font-size:12px;">Acrylic paints and canvases Rs. 1,500. Bill lost during fest</td>
+        </tr>
+        <tr>
+          <td><strong>C13</strong></td><td>Music Club</td><td>2026-10-10</td><td>equipment</td><td>Rs. 8,500</td>
+          <td><span class="status-tag tag-needs_approval">needs_approval</span></td>
+          <td style="color:#f87171; font-size:12px;">Claim amount Rs. 8,500 exceeds single-claim threshold of Rs. 5,000</td><td style="color:var(--text-muted); font-size:12px;">Sound mixer console Rs. 8,500 for annual concert. Tax invoice attached</td>
+        </tr>
+        <tr>
+          <td><strong>C15</strong></td><td>Robotics Club</td><td>2026-10-12</td><td>other</td><td>Rs. 4,200</td>
+          <td><span class="status-tag tag-over_budget">over_budget</span></td>
+          <td style="color:#f87171; font-size:12px;">Claim Rs. 4,200 pushes total (4,200) over category budget of Rs. 3,000</td><td style="color:var(--text-muted); font-size:12px;">Motor drivers and batteries Rs. 4,200. Bill attached</td>
+        </tr>
+        <tr>
+          <td><strong>C17</strong></td><td>Drama Club</td><td>2026-10-13</td><td>costumes</td><td>Rs. 2,400</td>
+          <td><span class="status-tag tag-over_budget">over_budget</span></td>
+          <td style="color:#f87171; font-size:12px;">Claim Rs. 2,400 pushes total (5,600) over category budget of Rs. 5,000</td><td style="color:var(--text-muted); font-size:12px;">Props and stage decoration Rs. 2,400. Bill attached</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="tab-summary" class="tab-content">
+  <pre>======================================================================
+CLUB EXPENSE CLAIM CHECKER - SUMMARY AUDIT REPORT
+======================================================================
+
+1. CLAIM STATUS COUNTS
+----------------------------------------
+  ok_to_pay          :  14 claims
+  needs_bill         :   2 claims
+  needs_approval     :   2 claims
+  over_budget        :   3 claims
+  needs_more_info    :   1 claims
+----------------------------------------
+  TOTAL CLAIMS       :  22 claims
+
+2. CLUB BUDGET SPENDING BREAKDOWN (Only ok_to_pay claims counted)
+----------------------------------------------------------------------
+Club                   | Category     | Spent (Rs.)  | Limit (Rs.)  | Remaining
+----------------------------------------------------------------------
+Coding Club            | food         | Rs.    2,500 | Rs.    4,000 | Rs.    1,500
+Coding Club            | printing     | Rs.    1,850 | Rs.    2,000 | Rs.      150
+Dance Club             | equipment    | Rs.    1,800 | Rs.   10,000 | Rs.    8,200
+Dance Club             | food         | Rs.    1,800 | Rs.    4,000 | Rs.    2,200
+Debate Club            | food         | Rs.    1,200 | Rs.    4,000 | Rs.    2,800
+Debate Club            | prizes       | Rs.    3,000 | Rs.    4,000 | Rs.    1,000
+Drama Club             | costumes     | Rs.    3,200 | Rs.    5,000 | Rs.    1,800
+Gaming Club            | equipment    | Rs.    3,200 | Rs.   10,000 | Rs.    6,800
+Literary Club          | prizes       | Rs.    1,500 | Rs.    4,000 | Rs.    2,500
+Music Club             | other        | Rs.    1,200 | Rs.    3,000 | Rs.    1,800
+Photography Club       | equipment    | Rs.    2,800 | Rs.   10,000 | Rs.    7,200
+Sports Club            | equipment    | Rs.    2,100 | Rs.   10,000 | Rs.    7,900
+Sports Club            | travel       | Rs.    4,500 | Rs.    5,000 | Rs.      500
+----------------------------------------------------------------------
+TOTAL AMOUNT APPROVED FOR PAYMENT: Rs. 30,650
+======================================================================
+</pre>
+</div>
+
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
