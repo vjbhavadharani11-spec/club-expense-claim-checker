@@ -1,0 +1,9 @@
+id,club,date,category,amount,status,reason,note
+C03,Dance Club,2026-10-02,travel,350,needs_bill,No bill or receipt attached,Auto fare to inter-college fest 350. No bill from the auto driver
+C04,Robotics Club,2026-10-03,equipment,6500,needs_approval,"Claim amount Rs. 6,500 exceeds single-claim threshold of Rs. 5,000","Purchased Arduino kits and sensors for Rs. 6,500. Bill attached"
+C09,Literary Club,2026-10-06,other,,needs_more_info,Missing or unverified amount,Need money for our event
+C10,Coding Club,2026-10-07,printing,900,over_budget,"Claim Rs. 900 pushes total (2,150) over category budget of Rs. 2,000",Event pamphlets printing Rs. 900. Bill attached
+C11,Art Club,2026-10-08,other,1500,needs_bill,No bill or receipt attached,"Acrylic paints and canvases Rs. 1,500. Bill lost during fest"
+C13,Music Club,2026-10-10,equipment,8500,needs_approval,"Claim amount Rs. 8,500 exceeds single-claim threshold of Rs. 5,000","Sound mixer console Rs. 8,500 for annual concert. Tax invoice attached"
+C15,Robotics Club,2026-10-12,other,4200,over_budget,"Claim Rs. 4,200 pushes total (4,200) over category budget of Rs. 3,000","Motor drivers and batteries Rs. 4,200. Bill attached"
+C17,Drama Club,2026-10-13,costumes,2400,over_budget,"Claim Rs. 2,400 pushes total (5,600) over category budget of Rs. 5,000","Props and stage decoration Rs. 2,400. Bill attached"

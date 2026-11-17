@@ -1,0 +1,15 @@
+id,club,date,category,amount,summary
+C01,Coding Club,2026-10-01,printing,1250,"Paid Rs. 1,250 for banner printing"
+C02,Dance Club,2026-10-01,equipment,1800,"Stage makeup kit Rs. 1,800 bought"
+C05,Music Club,2026-10-04,other,1200,Drumsticks and guitar strings for Rs.
+C06,Sports Club,2026-10-05,equipment,2100,Cricket balls and badminton shuttlecocks worth
+C07,Coding Club,2026-10-05,food,2500,Refreshments and snacks for hackathon participants
+C08,Drama Club,2026-10-06,costumes,3200,Costumes rental for annual play Rs.
+C12,Photography Club,2026-10-09,equipment,2800,"Camera tripod Rs. 2,800. Bill attached"
+C14,Debate Club,2026-10-11,prizes,3000,Trophies and certificates for debate championship
+C16,Literary Club,2026-10-12,prizes,1500,Book prizes for poetry competition Rs.
+C18,Sports Club,2026-10-14,travel,4500,Bus hire for tournament travel Rs.
+C19,Gaming Club,2026-10-15,equipment,3200,"Keyboard and mouse sets Rs. 3,200."
+C20,Coding Club,2026-10-16,printing,600,Stickers and badge printing Rs. 600.
+C21,Dance Club,2026-10-17,food,1800,"Refreshments for dance rehearsal Rs. 1,800."
+C22,Debate Club,2026-10-18,food,1200,"Snacks for inter-college delegates Rs. 1,200."

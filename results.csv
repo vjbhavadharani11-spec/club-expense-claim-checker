@@ -1,0 +1,23 @@
+id,club,date,category,amount,bill,status,reason,note
+C01,Coding Club,2026-10-01,printing,1250,True,ok_to_pay,Claim verified and within budget,"Paid Rs. 1,250 for banner printing at Copy Point. Bill attached"
+C02,Dance Club,2026-10-01,equipment,1800,True,ok_to_pay,Claim verified and within budget,"Stage makeup kit Rs. 1,800 bought from Beauty Store. Bill attached"
+C03,Dance Club,2026-10-02,travel,350,False,needs_bill,No bill or receipt attached,Auto fare to inter-college fest 350. No bill from the auto driver
+C04,Robotics Club,2026-10-03,equipment,6500,True,needs_approval,"Claim amount Rs. 6,500 exceeds single-claim threshold of Rs. 5,000","Purchased Arduino kits and sensors for Rs. 6,500. Bill attached"
+C05,Music Club,2026-10-04,other,1200,True,ok_to_pay,Claim verified and within budget,"Drumsticks and guitar strings for Rs. 1,200. Bill receipt attached"
+C06,Sports Club,2026-10-05,equipment,2100,True,ok_to_pay,Claim verified and within budget,"Cricket balls and badminton shuttlecocks worth Rs. 2,100, bill attached"
+C07,Coding Club,2026-10-05,food,2500,True,ok_to_pay,Claim verified and within budget,"Refreshments and snacks for hackathon participants Rs. 2,500. Bill attached"
+C08,Drama Club,2026-10-06,costumes,3200,True,ok_to_pay,Claim verified and within budget,"Costumes rental for annual play Rs. 3,200. Invoice attached"
+C09,Literary Club,2026-10-06,other,,False,needs_more_info,Missing or unverified amount,Need money for our event
+C10,Coding Club,2026-10-07,printing,900,True,over_budget,"Claim Rs. 900 pushes total (2,150) over category budget of Rs. 2,000",Event pamphlets printing Rs. 900. Bill attached
+C11,Art Club,2026-10-08,other,1500,False,needs_bill,No bill or receipt attached,"Acrylic paints and canvases Rs. 1,500. Bill lost during fest"
+C12,Photography Club,2026-10-09,equipment,2800,True,ok_to_pay,Claim verified and within budget,"Camera tripod Rs. 2,800. Bill attached"
+C13,Music Club,2026-10-10,equipment,8500,True,needs_approval,"Claim amount Rs. 8,500 exceeds single-claim threshold of Rs. 5,000","Sound mixer console Rs. 8,500 for annual concert. Tax invoice attached"
+C14,Debate Club,2026-10-11,prizes,3000,True,ok_to_pay,Claim verified and within budget,"Trophies and certificates for debate championship Rs. 3,000. Bill attached"
+C15,Robotics Club,2026-10-12,other,4200,True,over_budget,"Claim Rs. 4,200 pushes total (4,200) over category budget of Rs. 3,000","Motor drivers and batteries Rs. 4,200. Bill attached"
+C16,Literary Club,2026-10-12,prizes,1500,True,ok_to_pay,Claim verified and within budget,"Book prizes for poetry competition Rs. 1,500. Bill receipt attached"
+C17,Drama Club,2026-10-13,costumes,2400,True,over_budget,"Claim Rs. 2,400 pushes total (5,600) over category budget of Rs. 5,000","Props and stage decoration Rs. 2,400. Bill attached"
+C18,Sports Club,2026-10-14,travel,4500,True,ok_to_pay,Claim verified and within budget,"Bus hire for tournament travel Rs. 4,500. Receipt attached"
+C19,Gaming Club,2026-10-15,equipment,3200,True,ok_to_pay,Claim verified and within budget,"Keyboard and mouse sets Rs. 3,200. Bill attached"
+C20,Coding Club,2026-10-16,printing,600,True,ok_to_pay,Claim verified and within budget,Stickers and badge printing Rs. 600. Bill attached
+C21,Dance Club,2026-10-17,food,1800,True,ok_to_pay,Claim verified and within budget,"Refreshments for dance rehearsal Rs. 1,800. Bill attached"
+C22,Debate Club,2026-10-18,food,1200,True,ok_to_pay,Claim verified and within budget,"Snacks for inter-college delegates Rs. 1,200. Bill attached"
