@@ -10,7 +10,7 @@ import streamlit as st
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from expense_checker import process_all_claims, write_reports, classify, decide, BUDGETS_DEFAULT if 'BUDGETS_DEFAULT' in dir() else {}
+from expense_checker import process_all_claims, write_reports, classify, decide
 from llm_client import call_llm
 
 st.set_page_config(
