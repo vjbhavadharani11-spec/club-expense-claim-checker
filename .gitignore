@@ -1,0 +1,16 @@
+# Python environment and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Environment secrets and API keys (CRITICAL REQUIREMENT)
+.env
+*.env.local
+
+# IDE and Editor configurations
+.vscode/
+.idea/
+*.swp
