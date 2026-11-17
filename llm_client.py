@@ -1,5 +1,5 @@
 """
-llm_client.py - LLM API integration with 5-role prompt and deterministic offline fallback.
+llm_client.py - Groq LLM API integration with 5-role prompt and deterministic offline fallback.
 CIT AI-Native Engineering Capstone Project: Club Expense Claim Checker
 """
 
@@ -31,8 +31,6 @@ def _deterministic_extractor(note: str) -> dict:
     - Detects bill presence and checks for negative qualifiers
     - Categorizes into allowed categories
     """
-    # 1. Extract amount: find digits or numbers with commas (e.g. 1,250 or 350)
-    # Exclude notes that require rate calculations (e.g. "per person", "per head", "each")
     note_lower = note.lower()
     amount = None
     
@@ -50,7 +48,6 @@ def _deterministic_extractor(note: str) -> dict:
                     break
 
     # 2. Extract category
-    note_lower = note.lower()
     if any(w in note_lower for w in ["print", "banner", "pamphlet", "sticker", "badge"]):
         category = "printing"
     elif any(w in note_lower for w in ["food", "snack", "refreshment", "tea", "lunch", "dinner"]):
@@ -85,44 +82,45 @@ def _deterministic_extractor(note: str) -> dict:
 
 def call_llm(note: str) -> dict:
     """
-    Calls Gemini API with the 5-role system prompt to extract claim facts.
+    Calls Groq Cloud API with the 5-role system prompt to extract claim facts.
+    Uses OpenAI-compatible endpoint: https://api.groq.com/openai/v1/chat/completions
     If the API key is not configured, invalid, or offline, falls back safely to
     the deterministic rule-based extractor so the system never crashes.
     """
-    api_key = os.getenv("GEMINI_API_KEY", "").strip()
-    model = os.getenv("LLM_MODEL", "gemini-1.5-flash").strip()
+    api_key = os.getenv("GROQ_API_KEY", "").strip()
+    model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile").strip()
     system_instruction = load_system_prompt()
 
     # If key is mock or unset, use deterministic extractor safely
-    if not api_key or api_key.startswith("mock-") or api_key == "YOUR_GEMINI_API_KEY":
+    if not api_key or api_key.startswith("mock-") or api_key == "YOUR_GROQ_API_KEY":
         return _deterministic_extractor(note)
 
-    # Call Gemini REST API directly using standard requests
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
-    headers = {"Content-Type": "application/json"}
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
     payload = {
-        "contents": [
+        "model": model,
+        "messages": [
+            {
+                "role": "system",
+                "content": system_instruction
+            },
             {
                 "role": "user",
-                "parts": [
-                    {"text": f"Extract the claim facts from this note:\n\"{note}\""}
-                ]
+                "content": f"Extract the claim facts from this note:\n\"{note}\""
             }
         ],
-        "systemInstruction": {
-            "parts": [{"text": system_instruction}]
-        },
-        "generationConfig": {
-            "responseMimeType": "application/json",
-            "temperature": 0.0
-        }
+        "response_format": {"type": "json_object"},
+        "temperature": 0.0
     }
 
     try:
         response = requests.post(url, headers=headers, json=payload, timeout=10)
         if response.status_code == 200:
             data = response.json()
-            raw_text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+            raw_text = data["choices"][0]["message"]["content"].strip()
             # Clean possible markdown wrapping if returned
             if raw_text.startswith("```json"):
                 raw_text = raw_text[7:]
@@ -132,7 +130,7 @@ def call_llm(note: str) -> dict:
                 raw_text = raw_text[:-3]
             return json.loads(raw_text.strip())
         else:
-            # On API error, fallback safely
+            # On API error, fallback safely without crashing
             return _deterministic_extractor(note)
     except Exception:
         # Robustness rule: never crash on network/JSON errors
