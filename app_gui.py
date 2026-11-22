@@ -99,12 +99,12 @@ HTML_PAGE = """<!DOCTYPE html>
   pre { background: #0f172a; border: 1px solid var(--border); border-radius: 6px; padding: 14px; overflow-x: auto; color: #38bdf8; font-family: monospace; }
 </style>
 </head>
-<body>
+<body>.
 
 <div class="header">
   <div>
     <h1>🎓 College Club Expense Claim Checker</h1>
-    <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">CIT AI-Native Engineering Capstone · Automated Audit Triage System</p>
+    <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Bhavadharani · CIT AI-Native Engineering Capstone · Automated Audit Triage System</p>
   </div>
   <span class="badge">Faculty Audit Safeguard Active</span>
 </div>
@@ -376,6 +376,18 @@ class DashboardHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
             self.wfile.write(HTML_PAGE.encode("utf-8"))
+        elif url.path == "/dashboard.html":
+            dashboard_path = os.path.join(BASE_DIR, "dashboard.html")
+            if not os.path.exists(dashboard_path):
+                self.send_response(404)
+                self.end_headers()
+                return
+            with open(dashboard_path, "r", encoding="utf-8") as f:
+                dashboard_html = f.read()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(dashboard_html.encode("utf-8"))
         elif url.path == "/api/data":
             # If results don't exist, generate them
             if not os.path.exists(RESULTS_FILE):
@@ -457,7 +469,7 @@ if __name__ == "__main__":
     server_address = ('', port)
     httpd = HTTPServer(server_address, DashboardHandler)
     print("=" * 80)
-    print(f"🎓 College Club Expense Claim Checker - GUI Dashboard Server")
+    print("College Club Expense Claim Checker - GUI Dashboard Server")
     print(f"   Local URL: http://localhost:{port}")
     print("=" * 80)
     print("Opening browser automatically... (Press Ctrl+C to stop)")

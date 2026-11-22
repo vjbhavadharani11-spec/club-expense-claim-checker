@@ -14,3 +14,7 @@ venv/
 .vscode/
 .idea/
 *.swp
+
+# Temporary Office lock files
+~$*
+*.tmp
