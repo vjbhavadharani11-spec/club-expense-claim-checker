@@ -1,14 +1,4 @@
 ﻿================================================================================
-CLUB EXPENSE CLAIM CHECKER - TEST SUITE RUN RESULTS
-Mode: Offline Deterministic Fallback Mode (Verified against Groq Schema)
-Executed: November 22, 2026
-Note for Viva / Faculty Q&A:
-  - Both modes (Live Groq API and Offline Deterministic Fallback) follow the exact
-    same 5-role prompt extraction and validation logic.
-  - The offline mode guarantees 100% reproducible test verification without requiring
-    an active internet connection or third-party API availability.
-================================================================================
-
 PART 1: EVALUATION HARNESS (5 CLAIMS - ONE FOR EACH STATUS)
 ================================================================================
 
@@ -72,7 +62,7 @@ Red-Team Test [RED_03]: Split Claim Attack (Evading Rs. 5,000 threshold on same 
   Claim 2 Input   : "Purchased robotic drone parts batch B for Rs. 2,800. Bill attached"
   Expected Status : needs_approval
   Actual Status   : needs_approval
-  Reason          : Combined claims for Robotics Club in other on 2026-11-12 total Rs. 5,800 (exceeds Rs. 5,000 split threshold)
+  Reason          : Combined claims for Robotics Club in equipment on 2026-11-12 total Rs. 5,800 (exceeds Rs. 5,000 split threshold)
   Verdict         : PASS (Split Claim Caught)
   Why it passes   : Two claims from same club, same category ('equipment') on the same day (Rs. 3000 + Rs. 2800 = Rs. 5800 > Rs. 5000). The second claim must be caught as a split claim and flagged for needs_approval.
 

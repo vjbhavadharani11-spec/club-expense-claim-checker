@@ -74,11 +74,12 @@ def main():
     # Print rich output directly to the terminal!
     display_terminal_dashboard(results, running_totals, budgets, status_counts)
     
-    print("[+] All 4 output files generated successfully in this folder:")
+    print("[+] All 5 output and report files generated successfully in this folder:")
     print("    - payable.csv")
     print("    - review.csv")
     print("    - results.csv")
-    print("    - summary.txt\n")
+    print("    - summary.txt")
+    print("    - dashboard.html\n")
 
 if __name__ == "__main__":
     main()

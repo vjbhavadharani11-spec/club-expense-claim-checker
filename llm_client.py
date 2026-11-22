@@ -88,7 +88,7 @@ def call_llm(note: str) -> dict:
     the deterministic rule-based extractor so the system never crashes.
     """
     api_key = os.getenv("GROQ_API_KEY", "").strip()
-    model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile").strip()
+    model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b").strip()
     system_instruction = load_system_prompt()
 
     # If key is mock or unset, use deterministic extractor safely
