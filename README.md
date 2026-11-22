@@ -50,7 +50,7 @@ club-expense-claim-checker/
 ## 🚀 Setup & Execution Instructions
 
 ### 1. Prerequisites
-- Python 3.10+ installed.
+- Python 3.11 (tested, Python 3.10+ supported).
 - (Optional) Groq API Key from [Groq Console](https://console.groq.com/keys).
 
 ### 2. Environment Configuration
@@ -91,7 +91,7 @@ Claims are processed through `decide()` in this strict priority:
 ---
 
 ## 📊 Summary of Audit Results (22 Claims)
-- `ok_to_pay`: 14 claims (Rs. 30,650 approved)
+- `ok_to_pay`: 14 claims (Rs. 30,650 marked OK to pay)
 - `needs_bill`: 2 claims
 - `needs_approval`: 2 claims
 - `over_budget`: 3 claims

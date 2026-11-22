@@ -319,7 +319,7 @@ def write_reports(results: list, running_totals: dict, budgets: dict, status_cou
             f.write(f"{club:<22} | {cat:<12} | Rs. {spent:>8,} | Rs. {limit:>8,} | Rs. {remaining:>8,}\n")
             
         f.write("-" * 70 + "\n")
-        f.write(f"TOTAL AMOUNT APPROVED FOR PAYMENT: Rs. {total_payable_amount:,}\n")
+        f.write(f"TOTAL AMOUNT MARKED OK TO PAY: Rs. {total_payable_amount:,}\n")
         f.write("=" * 70 + "\n")
 
 def main():

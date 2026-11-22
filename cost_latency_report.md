@@ -4,7 +4,7 @@
 **Project:** Club Expense Claim Checker  
 **Target Platform:** Groq Cloud API  
 **Target Model:** `llama-3.3-70b-versatile`  
-**Pricing Source:** Groq Official Cloud Pricing (Standard Tier)  
+**Pricing Source:** Groq Official Cloud Pricing Documentation (https://groq.com/pricing)  
 
 ---
 
@@ -32,14 +32,15 @@
 
 ---
 
-## 3. Financial Cost Estimation per Day
+## 3. Financial Cost Estimation & Free-Tier Limits (Groq Official Rates)
 
 ### Official Pricing (Groq Llama-3.3-70b-versatile)
 - **Input Tokens:** \$0.59 per 1,000,000 tokens (\$0.00059 / 1k tokens)
 - **Output Tokens:** \$0.79 per 1,000,000 tokens (\$0.00079 / 1k tokens)
-- **Free Tier Allowance:** Groq provides generous free tier rate limits (30 RPM / 6,000 TPM) for development.
+- **Free Developer Tier Limits:** Groq provides free access with limits of **30 Requests Per Minute (RPM)** and **6,000 Tokens Per Minute (TPM)**, and **14,400 Requests Per Day (RPD)**.
+  - Our daily requirement is only 50 requests/day, which uses less than **0.35%** of the free daily allowance.
 
-### Daily Cost Calculations (50 Claims)
+### Daily Cost Calculations (50 Claims on Paid Tier)
 1. **Input Cost:**
    $$\text{Daily Input Tokens} = 50 \times 275 = 13,750 \text{ tokens}$$
    $$\text{Cost} = \frac{13,750}{1,000,000} \times \$0.59 = \$0.008112$$

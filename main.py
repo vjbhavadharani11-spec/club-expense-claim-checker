@@ -21,7 +21,7 @@ def display_terminal_dashboard(results: list, running_totals: dict, budgets: dic
     # Print status counts
     print("\n[1] AUDIT SUMMARY STATUS COUNTS:")
     print("-" * 55)
-    print(f"  * OK TO PAY (Approved for Signature) : {status_counts.get('ok_to_pay', 0):>3} claims")
+    print(f"  * OK TO PAY (Ready for Signature) : {status_counts.get('ok_to_pay', 0):>3} claims")
     print(f"  * NEEDS BILL (Missing receipt)       : {status_counts.get('needs_bill', 0):>3} claims")
     print(f"  * NEEDS APPROVAL (> Rs. 5k / Split)  : {status_counts.get('needs_approval', 0):>3} claims")
     print(f"  * OVER BUDGET (Limit exceeded)       : {status_counts.get('over_budget', 0):>3} claims")
@@ -45,15 +45,15 @@ def display_terminal_dashboard(results: list, running_totals: dict, budgets: dic
     print(f"{'Club':<18} | {'Category':<10} | {'Spent':<12} | {'Limit':<12} | {'Remaining'}")
     print("-" * 75)
     sorted_keys = sorted(running_totals.keys())
-    total_approved = 0
+    total_payable = 0
     for (club, cat) in sorted_keys:
         spent = running_totals[(club, cat)]
-        total_approved += spent
+        total_payable += spent
         limit = budgets.get(cat, 0)
         remaining = limit - spent
         print(f"{club:<18} | {cat:<10} | Rs. {spent:>7,} | Rs. {limit:>7,} | Rs. {remaining:>7,}")
     print("-" * 75)
-    print(f"TOTAL AMOUNT APPROVED FOR PAYMENT DISBURSEMENT: Rs. {total_approved:,}")
+    print(f"TOTAL AMOUNT MARKED OK TO PAY: Rs. {total_payable:,}")
     print("=" * 90 + "\n")
 
 def main():
@@ -63,6 +63,13 @@ def main():
     
     results, running_totals, budgets, status_counts = process_all_claims(claims_file, budgets_file)
     write_reports(results, running_totals, budgets, status_counts, base_dir)
+    
+    # Automatically update dashboard.html
+    try:
+        from update_dashboard import generate_html_dashboard
+        generate_html_dashboard()
+    except Exception:
+        pass
     
     # Print rich output directly to the terminal!
     display_terminal_dashboard(results, running_totals, budgets, status_counts)

@@ -1,7 +1,7 @@
 # Project Specification: Club Expense Claim Checker
 **Course:** CIT AI-Native Engineering Programme · Semester 1 · Assessment 5  
 **Domain:** College Club Expense Auditing & Finance  
-**Name:** First-Year Student  
+**Name:** V J Bhavadharani  
 **Milestone:** Checkpoint 1 – Project Specification  
 
 ---
