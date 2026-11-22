@@ -21,7 +21,7 @@ def display_terminal_dashboard(results: list, running_totals: dict, budgets: dic
     # Print status counts
     print("\n[1] AUDIT SUMMARY STATUS COUNTS:")
     print("-" * 55)
-    print(f"  * OK TO PAY (Ready for Signature) : {status_counts.get('ok_to_pay', 0):>3} claims")
+    print(f"  * OK TO PAY (Ready for treasurer signature) : {status_counts.get('ok_to_pay', 0):>3} claims")
     print(f"  * NEEDS BILL (Missing receipt)       : {status_counts.get('needs_bill', 0):>3} claims")
     print(f"  * NEEDS APPROVAL (> Rs. 5k / Split)  : {status_counts.get('needs_approval', 0):>3} claims")
     print(f"  * OVER BUDGET (Limit exceeded)       : {status_counts.get('over_budget', 0):>3} claims")

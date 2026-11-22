@@ -2,7 +2,7 @@
 **Course:** CIT AI-Native Engineering Programme · Semester 1 · Assessment 5  
 **Domain:** College Club Expense Auditing & Finance  
 **Name:** V J Bhavadharani  
-**Milestone:** Checkpoint 1 – Project Specification  
+**Milestone:** Checkpoint 1 – Project Specification (Pending faculty sign-off)  
 
 ---
 

@@ -182,7 +182,7 @@ def build_pdf():
                 "<b>Features:</b> Live status badges (14 OK to Pay, 2 Needs Bill, 2 Needs Approval, 3 Over Budget, 1 Needs Info), tabs for payable.csv vs review.csv.",
                 "<b>Single Claim Inspector:</b> Allows teachers to type any custom note and test the AI live during presentation."
             ],
-            "script": "We built two different user views so anyone can use the system. First is the Terminal view. By running python main.py, it displays clean tables showing all 22 claims, who got approved, and how much money is left in each club's budget. Second is our visual Web Dashboard. Anyone can just double-click dashboard.html to view it in Chrome or Edge. It has tabs to inspect payable claims, review flagged claims, and even a single claim tester where teachers can test custom notes live!",
+            "script": "We built two different user views so anyone can use the system. First is the Terminal view. By running python main.py, it displays clean tables showing all 22 claims, which claims are marked OK to pay, and how much money is left in each club's budget. Second is our visual Web Dashboard. Anyone can just double-click dashboard.html to view it in Chrome or Edge. It has tabs to inspect payable claims, review flagged claims, and even a single claim tester where teachers can test custom notes live!",
             "tips": "Offer a live demo! Say: 'If respected faculty would like, I can test any claim sentence right now in the dashboard.'"
         },
         {

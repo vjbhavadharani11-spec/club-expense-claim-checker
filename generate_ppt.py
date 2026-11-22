@@ -261,7 +261,7 @@ def create_deck():
     set_notes(s6,
         "SPEAKER SCRIPT (What to say):\n"
         "We built two different user views so anyone can use the system:\n"
-        "First is the Terminal view. By running python main.py, it displays clean tables showing all 22 claims, who got approved, and how much money is left in each club's budget.\n"
+        "First is the Terminal view. By running python main.py, it displays clean tables showing all 22 claims, which claims are marked OK to pay, and how much money is left in each club's budget.\n"
         "Second is our visual Web Dashboard. Anyone can just double-click dashboard.html to view it in Chrome or Edge. It has tabs to inspect payable claims, review flagged claims, and even a single claim tester where teachers can test custom notes live!"
     )
 

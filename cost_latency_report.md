@@ -5,6 +5,7 @@
 **Target Platform:** Groq Cloud API  
 **Target Model:** `llama-3.3-70b-versatile`  
 **Pricing Source:** Groq Official Cloud Pricing Documentation (https://groq.com/pricing)  
+**Verified On:** November 22, 2026 (Pricing link: https://groq.com/pricing)  
 
 ---
 
