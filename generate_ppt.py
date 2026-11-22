@@ -159,7 +159,7 @@ def create_deck():
     ])
 
     add_card(s3, 4.8, 1.6, 3.8, 5.2, "2. Groq AI Extraction", [
-        "Uses Groq Llama-3.3-70B model.",
+        "Uses Groq openai/gpt-oss-120b model.",
         "5-Role Prompt: Authority, Exemplar, Constraint, Rubric, Metadata.",
         "Extracts Clean JSON:\n  • amount (number or null)\n  • category (7 allowed choices)\n  • bill (true or false)\n  • summary (10 words or fewer)",
         "Constraint: Never calculate; never guess!"
@@ -296,7 +296,7 @@ def create_deck():
     add_header(s8, "Speed, Cost & Offline Safety")
 
     add_card(s8, 0.8, 1.6, 5.6, 5.2, "Super Fast with Groq LPUs", [
-        "Inference Speed: Groq runs Llama-3.3-70B at over 250 tokens per second.",
+        "Inference Speed: Groq runs openai/gpt-oss-120b at over 250 tokens per second.",
         "Each claim note is checked in about 0.3 seconds (300 ms).",
         "A full batch of 22 claims finishes in about 7 to 10 seconds.",
         "Offline Fallback: If internet is off, our Python rule extractor runs in under 1 millisecond!"

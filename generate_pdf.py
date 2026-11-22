@@ -118,7 +118,7 @@ def build_pdf():
             "bullets": [
                 "<b>Project:</b> Club Expense Claim Checker",
                 "<b>Purpose:</b> Automatically check student club expense bills using AI and Python.",
-                "<b>Tools:</b> Python 3.11, Groq Cloud API (Llama-3.3-70B), HTML5/JS Dashboard.",
+                "<b>Tools:</b> Python 3.11, Groq Cloud API (openai/gpt-oss-120b), HTML5/JS Dashboard.",
                 "<b>Weightage:</b> CIT Capstone Assessment 5 (40% of semester marks)."
             ],
             "script": "Hello everyone and respected faculty. Today I will present my project, the Club Expense Claim Checker. In our college, student clubs spend money during fests and events. Right now, auditing these bills takes a lot of time. My project uses an AI model from Groq to read informal student claims, and Python code to verify the facts so no mistakes happen.",
@@ -201,7 +201,7 @@ def build_pdf():
             "num": "Slide 8",
             "title": "Speed, Cost & Offline Safety",
             "bullets": [
-                "<b>Fast Response (Groq LPUs):</b> Groq runs Llama-3.3-70B at over 250 tokens per second. Checks a claim in about 0.3 seconds.",
+                "<b>Fast Response (Groq LPUs):</b> Groq runs openai/gpt-oss-120b at over 250 tokens per second. Checks a claim in about 0.3 seconds.",
                 "<b>Full Run Time:</b> All 22 claims are processed in under 10 seconds.",
                 "<b>Super Cheap:</b> Free under Groq's developer tier. Even on paid tier, 50 claims cost only $0.0098 (less than 1 Rupee per day).",
                 "<b>Offline Fallback:</b> If internet is disconnected, our local Python rule extractor runs in under 1 millisecond with zero errors."

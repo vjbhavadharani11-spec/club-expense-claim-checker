@@ -1,7 +1,7 @@
 # Club Expense Claim Checker
 **CIT AI-Native Engineering Programme · Semester 1 · Capstone Project (Assessment 5)**
 
-An automated financial audit triage assistant for college club expense claims. The system uses a Large Language Model (**Groq API** running `llama-3.3-70b-versatile`) guided by a 5-role prompt to extract structured claim details, independently verifies all data with deterministic Python validation rules, enforces category budgets and split-claim detection, and outputs structured audit reports for the faculty treasurer.
+An automated financial audit triage assistant for college club expense claims. The system uses a Large Language Model (**Groq API** running `openai/gpt-oss-120b`) guided by a 5-role prompt to extract structured claim details, independently verifies all data with deterministic Python validation rules, enforces category budgets and split-claim detection, and outputs structured audit reports for the faculty treasurer.
 
 ---
 
@@ -21,7 +21,7 @@ club-expense-claim-checker/
 ├── budgets.csv             # Input: Category spending limits per club
 │
 ├── system_prompt.txt       # 5-role system prompt (Authority, Exemplar, Constraint, Rubric, Metadata)
-├── llm_client.py           # Groq API integration (llama-3.3-70b-versatile) with offline fallback
+├── llm_client.py           # Groq API integration (openai/gpt-oss-120b) with offline fallback
 ├── expense_checker.py      # Core program with validation & decision functions
 ├── main.py                 # Primary entry point with formatted terminal dashboard output
 ├── test_single_claim.py    # Checkpoint 2 single claim test runner
@@ -57,7 +57,7 @@ club-expense-claim-checker/
 Create a `.env` file in the project root:
 ```bash
 GROQ_API_KEY=your_groq_api_key_here
-GROQ_MODEL=llama-3.3-70b-versatile
+GROQ_MODEL=openai/gpt-oss-120b
 ```
 *(If no API key is provided, the system seamlessly uses its built-in deterministic fallback extractor for offline grading and demonstration).*
 

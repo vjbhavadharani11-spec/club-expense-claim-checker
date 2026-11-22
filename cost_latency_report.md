@@ -3,7 +3,7 @@
 **Course:** CIT AI-Native Engineering Programme · Assessment 5  
 **Project:** Club Expense Claim Checker  
 **Target Platform:** Groq Cloud API  
-**Target Model:** `llama-3.3-70b-versatile`  
+**Target Model:** `openai/gpt-oss-120b`  
 **Pricing Source:** Groq Official Cloud Pricing Documentation (https://groq.com/pricing)  
 **Verified On:** November 22, 2026 (Pricing link: https://groq.com/pricing)  
 
@@ -24,10 +24,10 @@
 *Note: Groq LPUs (Language Processing Units) deliver industry-leading inference speeds.*
 
 - **Network Round Trip Time (RTT):** ~150 ms - 220 ms.
-- **Inference Time (Groq LPU Llama-3.3-70B):** ~80 ms - 150 ms (speeds exceed 250-300 tokens/sec).
-- **Total Expected Latency per API Call:** **~250 ms – 370 ms per claim** (synchronous single-item call).
+- **Inference Time (Groq LPU openai/gpt-oss-120b):** ~90 ms - 180 ms (speeds exceed 250-300 tokens/sec).
+- **Total Expected Latency per API Call:** **~250 ms – 390 ms per claim** (synchronous single-item call).
 - **Batch Processing for 50 Claims:**
-  - *Sequential processing:* ~12 to 18 seconds total run time.
+  - *Sequential processing:* ~14 to 20 seconds total run time.
   - *Concurrent processing (ThreadPool):* Under 2 seconds total.
   - *Offline Deterministic Fallback:* **< 1 millisecond per claim** (0 network latency).
 
@@ -35,10 +35,10 @@
 
 ## 3. Financial Cost Estimation & Free-Tier Limits (Groq Official Rates)
 
-### Official Pricing (Groq Llama-3.3-70b-versatile)
+### Official Pricing (Groq openai/gpt-oss-120b)
 - **Input Tokens:** \$0.59 per 1,000,000 tokens (\$0.00059 / 1k tokens)
 - **Output Tokens:** \$0.79 per 1,000,000 tokens (\$0.00079 / 1k tokens)
-- **Free Developer Tier Limits:** Groq provides free access with limits of **30 Requests Per Minute (RPM)** and **6,000 Tokens Per Minute (TPM)**, and **14,400 Requests Per Day (RPD)**.
+- **Free Developer Tier Limits:** Groq provides free access with limits of **30 Requests Per Minute (RPM)**, **6,000 Tokens Per Minute (TPM)**, and **14,400 Requests Per Day (RPD)**.
   - Our daily requirement is only 50 requests/day, which uses less than **0.35%** of the free daily allowance.
 
 ### Daily Cost Calculations (50 Claims on Paid Tier)

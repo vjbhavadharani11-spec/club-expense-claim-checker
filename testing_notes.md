@@ -2,7 +2,8 @@
 
 **Course:** CIT AI-Native Engineering Programme · Assessment 5  
 **Project:** Club Expense Claim Checker  
-**Target Model:** Groq Cloud API (`openai/gpt-oss-120b`)  
+**Target Platform:** Groq Cloud API  
+**Model Used:** `openai/gpt-oss-120b`  
 **Test Suite File:** `test_suite.py`  
 **Raw Execution Log:** `test_results.txt`  
 
@@ -12,10 +13,10 @@
 
 The testing harness supports two operating modes:
 
-### A. Live Groq Cloud API Mode (Tested & Verified)
-- When a valid `GROQ_API_KEY` is present in `.env`, the program issues live HTTP POST requests to Groq Cloud's OpenAI-compatible completions endpoint (`https://api.groq.com/openai/v1/chat/completions`).
+### A. Live Groq Cloud API Mode (Tested & Verified with `openai/gpt-oss-120b`)
+- When a valid `GROQ_API_KEY` is present in `.env`, the program issues live HTTP POST requests to Groq Cloud's OpenAI-compatible completions endpoint (`https://api.groq.com/openai/v1/chat/completions`) using the **`openai/gpt-oss-120b`** model.
 - The 5-role system prompt (`system_prompt.txt`) is passed via the `system` message role, enforcing zero calculation, no word-based number parsing, and structured JSON output.
-- **Result:** All 5 evaluation claims and all 3 red-team attack tests passed with 100% accuracy.
+- **Live Output Log:** Saved in `test_results.txt`. All 5 evaluation claims and all 3 red-team attack tests passed with 100% accuracy.
 
 ### B. Offline Deterministic Fallback Mode
 - If internet connectivity is interrupted, or if an API key is absent, `llm_client.py` gracefully catches network errors and invokes the deterministic fallback extractor.
