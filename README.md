@@ -1,7 +1,7 @@
 # Club Expense Claim Checker
 **CIT AI-Native Engineering Programme · Semester 1 · Capstone Project (Assessment 5)**
 
-An automated financial audit triage assistant for college club expense claims. The system uses a Large Language Model (Google Gemini) guided by a 5-role prompt to extract structured claim details, independently verifies all data with deterministic Python validation rules, enforces category budgets and split-claim detection, and outputs structured audit reports for the faculty treasurer.
+An automated financial audit triage assistant for college club expense claims. The system uses a Large Language Model (**Groq API** running `llama-3.3-70b-versatile`) guided by a 5-role prompt to extract structured claim details, independently verifies all data with deterministic Python validation rules, enforces category budgets and split-claim detection, and outputs structured audit reports for the faculty treasurer.
 
 ---
 
@@ -21,8 +21,9 @@ club-expense-claim-checker/
 ├── budgets.csv             # Input: Category spending limits per club
 │
 ├── system_prompt.txt       # 5-role system prompt (Authority, Exemplar, Constraint, Rubric, Metadata)
-├── llm_client.py           # Gemini API integration with offline deterministic fallback
-├── expense_checker.py      # Main program with core validation & decision functions
+├── llm_client.py           # Groq API integration (llama-3.3-70b-versatile) with offline fallback
+├── expense_checker.py      # Core program with validation & decision functions
+├── main.py                 # Primary entry point with formatted terminal dashboard output
 ├── test_single_claim.py    # Checkpoint 2 single claim test runner
 ├── test_suite.py           # Checkpoint 4 test harness (5 status claims + 3 red-team attacks)
 │
@@ -30,10 +31,13 @@ club-expense-claim-checker/
 ├── review.csv              # Output: Flagged claims with reason and raw note
 ├── results.csv             # Output: Master record of all claims and statuses
 ├── summary.txt             # Output: Executive summary and club budget utilization tables
+├── dashboard.html          # Interactive visual web dashboard (open directly in browser)
+├── presentation.pptx       # 10-slide PowerPoint presentation with presenter notes
+├── presentation_guide.pdf  # Complete presenter notes & simple English speaker script
 │
 ├── spec.md                 # One-page Project Specification
 ├── judgment_framework.md   # Judgment Framework & Risk Matrix
-├── cost_latency_report.md  # Detailed Cost and Latency Engineering Analysis
+├── cost_latency_report.md  # Detailed Cost and Latency Engineering Analysis (Groq LPU)
 ├── ai_decision_journal.md  # Architecture trade-offs and design rationale
 ├── reflection.md           # 400-word Capstone Project Reflection
 ├── .env.example            # Sample environment variables template
@@ -47,15 +51,15 @@ club-expense-claim-checker/
 
 ### 1. Prerequisites
 - Python 3.10+ installed.
-- (Optional) Google Gemini API Key from [Google AI Studio](https://aistudio.google.com/).
+- (Optional) Groq API Key from [Groq Console](https://console.groq.com/keys).
 
 ### 2. Environment Configuration
 Create a `.env` file in the project root:
 ```bash
-GEMINI_API_KEY=your_gemini_api_key_here
-LLM_MODEL=gemini-1.5-flash
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
 ```
-*(If no API key is provided, the system seamlessly uses its built-in deterministic fallback extractor for offline grading).*
+*(If no API key is provided, the system seamlessly uses its built-in deterministic fallback extractor for offline grading and demonstration).*
 
 ### 3. Run Checkpoint 2 (Single Claim Test)
 ```bash
@@ -64,9 +68,9 @@ python test_single_claim.py
 
 ### 4. Run Main Application (Processes All 22 Claims)
 ```bash
-python expense_checker.py
+python main.py
 ```
-This generates `payable.csv`, `review.csv`, `results.csv`, and `summary.txt`.
+This prints the terminal dashboard and generates `payable.csv`, `review.csv`, `results.csv`, `summary.txt`, and updates `dashboard.html`.
 
 ### 5. Run Stage 4 Evaluation & Red-Team Test Suite
 ```bash
